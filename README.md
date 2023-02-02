@@ -42,7 +42,7 @@ $ python NGL-Spammer -h
 ```
 
 ## Download
-First of all you need [Git](https://git-scm.com), or you can download it from  [Releases](https://github.com/bxn4/en_ngl-spammer/releases) the latest release.
+First of all you need [Git](https://git-scm.com), or you can download it from  [Releases](https://github.com/bxn4/ngl-spammer_en/releases) the latest release.
 To run it download, and install [Python](https://www.python.org/), if it is not installed  it will won't work.
 
 ```bash
@@ -66,7 +66,7 @@ $ python3 NGL-Spammer.py
 
 ## Replit
 Before you run it, check if there is a new release! I always upload it to Replit a little later, you can find out that in the comments.
-If there is a new one, fork it!<br>You can run it here if you don't want to download it-> [Replit](https://replit.com/@BXn4/NGL-Spammer?v=1) <br><br><a href="https://replit.com/@BXn4/NGL-Spammer?v=1" target="_blank"><img src="https://img.shields.io/badge/replit-667881?style=for-the-badge&logo=replit&logoColor=white" alt="Replit"></a>
+If there is a new one, fork it!<br>You can run it here if you don't want to download it-> [Replit](https://replit.com/@BXn4/NGL-Spammeren#main.py) <br><br><a href="[https://replit.com/@BXn4/NGL-Spammer?v=1](https://replit.com/@BXn4/NGL-Spammeren#main.py)" target="_blank"><img src="https://img.shields.io/badge/replit-667881?style=for-the-badge&logo=replit&logoColor=white" alt="Replit"></a>
 
 ## Examples
 <img src="https://user-images.githubusercontent.com/78733248/216411554-c4521db5-0c03-4853-a487-ca1f76a92a54.png" width=220></img><img src="https://user-images.githubusercontent.com/78733248/216411573-38f7d70e-0c55-4108-b18c-cd81569e0047.png" width=220></img><img src="https://user-images.githubusercontent.com/78733248/216411578-8b03308e-b10e-4a8c-8120-9662b93b7086.png" width=220></img><br>
