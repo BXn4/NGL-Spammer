@@ -29,13 +29,13 @@ Once we have this, copy the name into the **accounts.txt**.
 There is no limit to how many names you can enter!
 Then you can start the program.
 ## Startup parameters
+You can start it with parameters.
 [-a ACCOUNT] [-q QUESTION] [-r REPEAT]
 ```bash
 # Query parameters
 $ python NGL-Spammer -h
 
 # Parameters
-You can start it with parameters.
 # For e.g. python NGL-Spammer -a someone, someone/crush -q "hi","how are you?","What's up?" -r 10
 # The program will send 'hi' and 'how are you' to 'someone' and 'someone/crush' 10 times repeat
 # If the -q parameter is not specified, the questions will be sent according to the question type.
