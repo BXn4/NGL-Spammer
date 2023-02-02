@@ -18,7 +18,7 @@
 <img src="https://user-images.githubusercontent.com/78733248/213006672-89089652-3251-4fd1-9bb2-e3d3507903c7.gif" width=200><br><br><br></p></img>
 
 ## How it works
-Allows NGL  accounts to be spammed with pre-written questions. The APP can handle maximum 15 questions, but it will only send 10 questions, because some questions didn't delivered. When it successfully sent the questions, the program waits 2  minutes (120 seconds) so that the site does not detect it as spam. After this time, it will send the question to the next account. When it reaches the end, you start from the beginning.
+Allows NGL  accounts to be spammed with pre-written questions. The APP can handle maximum 15 questions, but it will only send 10 questions, because some questions didn't delivered. When it successfully sent the questions, the program waits 2  minutes (120 seconds) so that the site does not detect it as spam. After this time, it will send the question to the next account. When it reaches the end, it start from the beginning.
 
 ## How To Use
 Tutorial: https://youtu.be/roLXTavyRkA<br>
