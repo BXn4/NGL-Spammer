@@ -35,7 +35,7 @@ Then you can start the program.
 $ python NGL-Spammer -h
 
 # Parameters
-# For e.g. python NGL-Spammer -a someone, someone/crush -q "hi, how are you? , What's up?" -r 10
+# For e.g. python NGL-Spammer -a someone, someone/crush -q "hi","how are you?","What's up?" -r 10
 # The program will send 'hi' and 'how are you' to 'someone' and 'someone/crush' 10 times repeat
 # If the -q parameter is not specified, the questions will be sent according to the question type.
 # If we don't specify the -r parameter, it will repeat indefinitely.
