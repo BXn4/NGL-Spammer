@@ -1,3 +1,12 @@
+# ╔╗╔╔═╗╦    ╔═╗╔═╗╔═╗╔╦╗╔╦╗╔═╗╦═╗
+# ║║║║ ╦║    ╚═╗╠═╝╠═╣║║║║║║║╣ ╠╦╝
+# ╝╚╝╚═╝╩═╝  ╚═╝╩  ╩ ╩╩ ╩╩ ╩╚═╝╩╚═ v4.1
+# bug fixes
+
+# The program was made for automation.
+# This program violates NGL's terms of service, use it at your own risk!
+# Also, I don't support using it for harassment
+
 import time
 import requests
 from random import *
@@ -5,10 +14,10 @@ from datetime import datetime
 import uuid
 import argparse
 
-parser = argparse.ArgumentParser(prog = 'NGL-Spammer', description='Flooding NGL accounts with questions.')
-parser.add_argument("-a", "--account", help="Accounts separated with ','")
-parser.add_argument("-q", "--question", help="Separate question(s) with ',' ('hi','what are you doing?')", type=str)
-parser.add_argument("-r", "--repeat", help="Number of repetitions (0 = infinite)", type=int)
+parser = argparse.ArgumentParser(prog = 'NGL-Spammer', description='NGL fiókok elárasztása kérdésekkel.')
+parser.add_argument("-f", "--fiok", help="A fiók(ok) megadása ,-vel")
+parser.add_argument("-k", "--kerdes", help="A kérdés(ek) megadása ,-vel ('szia','mit csinálsz?')", type=str)
+parser.add_argument("-i", "--ismetles", help="Az ismétlések száma (0 = végtelen)", type=int)
 args = parser.parse_args()
 
 fiokokszama = 0
@@ -53,50 +62,50 @@ eszkozidgeneralas()
 eszkozid = eszkozidgeneralas()
 
 try:
-    with open("src/questions.txt", "r", encoding="UTF-8") as olvas:
+    with open("szovegek/kerdesek.txt", "r", encoding="UTF-8") as olvas:
         kerdesek = [sorok.strip() for sorok in olvas]
-    with open("src/questions.txt", "r", encoding="UTF-8") as olvas:
+    with open("szovegek/kerdesek.txt", "r", encoding="UTF-8") as olvas:
         kerdesekpot = [sorok.strip() for sorok in olvas]
-    with open("src/neverhave.txt", "r", encoding="UTF-8") as olvas:
+    with open("szovegek/neverhave.txt", "r", encoding="UTF-8") as olvas:
         neverhave = [sorok.strip() for sorok in olvas]
-    with open("src/3words.txt", "r", encoding="UTF-8") as olvas:
+    with open("szovegek/3words.txt", "r", encoding="UTF-8") as olvas:
         haromwords = [sorok.strip() for sorok in olvas]
-    with open("src/names.txt", "r", encoding="UTF-8") as olvas:
+    with open("szovegek/nevek.txt", "r", encoding="UTF-8") as olvas:
         nevek = [sorok.strip() for sorok in olvas]
-    with open("src/tbh.txt", "r", encoding="UTF-8") as olvas:
+    with open("szovegek/tbh.txt", "r", encoding="UTF-8") as olvas:
         tbh = [sorok.strip() for sorok in olvas]
-    with open("src/dealbreaker.txt", "r", encoding="UTF-8") as olvas:
+    with open("szovegek/dealbreaker.txt", "r", encoding="UTF-8") as olvas:
         tizperde = [sorok.strip() for sorok in olvas]
-    with open("src/rizzme.txt", "r", encoding="UTF-8") as olvas:
+    with open("szovegek/rizzme.txt", "r", encoding="UTF-8") as olvas:
         rizzme = [sorok.strip() for sorok in olvas]
-    with open("accounts.txt", "r") as olvas:
+    with open("fiokok.txt", "r") as olvas:
         fiokok = [sorok.strip() for sorok in olvas]
-    mennyitkuldott = [0 for _ in range(len(fiokok))]
+    mennyitkuldott = [1 for _ in range(len(fiokok))]
     fiokokszama = len(fiokok)
 
 except (FileNotFoundError):
-  print("File not found!")
+  print("Nem található a fájl!")
 
 datum = datetime.now()
 ido = datum.strftime("%H:%M:%S")
-print("\n[{}] >> Starting\n".format(ido))
+print("NGL Spammer by: BXn4")
+print("\n[{}] >> Kezdés\n".format(ido))
 
-if args.account is None:
+if args.fiok is None:
   hossz = 0
 else:
   hossz = 1
-  fiokarg = args.account
-  kerdesarg = args.question
-  if args.question is None:
+  fiokarg = args.fiok
+  kerdesarg = args.kerdes
+  if args.kerdes is None:
     kerdesarg = " "
-  ismetles = args.repeat
+  ismetles = args.ismetles
   if ismetles is None:
     ismetles = -1
   if ismetles == 0:
     ismetles = -1
   else:
-    ismetles = args.repeat
-
+    ismetles = args.ismetles
 
 if hossz > 0:
   fiokok = []
@@ -128,7 +137,7 @@ if hossz > 0:
           mit = "Neverhave"
           gameslugkuld = "neverhave"
           if kerdesarg == " ":
-            szavak = ("I've never " + choice(neverhave))
+            szavak = ("Én még sohasem " + choice(neverhave))
             neverHave = szavak.replace('\n', '')
             kerdes = neverHave
             szavak = ""
@@ -218,7 +227,7 @@ if hossz > 0:
             kerdes = kerdesek[holtartakerdesben]
       else:
         gameslugkuld = ""
-        mit = "Question"
+        mit = "Kérdés"
         if kerdesarg == " ":
           kerdes = (choice(kerdesekpot))
         else:
@@ -242,20 +251,27 @@ if hossz > 0:
     "gameSlug": gameslugkuld,
     "referrer": ""
       }
-      mennyitkuldott[jelenlegi] += 1
-      print("-> %s (%s) \n[%s] %s" % (fiokok[jelenlegi],mennyitkuldott[jelenlegi],mit,kerdes) + "\n")
+      print(eszkozid)
       elkuld = request.post("https://ngl.link/api/submit", headers=fejresz, data=adat)
-      i = i + 1
+      eszkozid = eszkozidgeneralas()
+      if elkuld.status_code == 200:
+        print("-> %s (%s) \n[%s] %s" % (fiokok[jelenlegi],mennyitkuldott[jelenlegi],mit,kerdes) + "\n")
+        #print(elkuld)
+        mennyitkuldott[jelenlegi] += 1
+        i = i + 1
+      else:
+        print("[{}] Nem sikerült elküldeni. Várok 2 percet mielőtt újra megpróbálom\n".format(elkuld.status_code))
+        time.sleep(120)
 
     if (i == 10):
-      eszkozidgeneralas()
+      eszkozid = eszkozidgeneralas()
       jelenlegi += 1
       if jelenlegi == fiokokszama:
         jelenlegi = 0
       datum = datetime.now()
-      print("Next: -> " + fiokok[jelenlegi])
+      print("Következő: -> " + fiokok[jelenlegi])
       ido = datum.strftime("%H:%M:%S")
-      print("[{}] >> Intermission (2 mins)\n".format(ido))
+      print("[{}] >> Szünet (2 perc)\n".format(ido))
       time.sleep(120)
       i = 0
       if ismetles != -1:
@@ -263,7 +279,7 @@ if hossz > 0:
           x += 1
           datum = datetime.now()
           ido = datum.strftime("%H:%M:%S")
-          print("[%s] Number of repeats: %s/%s\n" % (ido,x,ismetles))
+          print("[%s] Ismétlések száma: %s/%s\n" % (ido,x,ismetles))
 else:
   while True:
     if (i < 10):
@@ -282,7 +298,7 @@ else:
           fiok = fiok.split("/")[0]
           mit = "Neverhave"
           gameslugkuld = "neverhave"
-          szavak = ("I've never " + choice(neverhave))
+          szavak = ("Én még sohasem " + choice(neverhave))
           neverHave = szavak.replace('\n', '')
           kerdes = neverHave
           szavak = ""
@@ -346,7 +362,7 @@ else:
           szavak = ""
       else:
         gameslugkuld = ""
-        mit = "Question"
+        mit = "Kérdés"
         kerdes = choice(kerdesek)
       url = f"https://ngl.link/{fiok}"
 
@@ -364,19 +380,25 @@ else:
     "gameSlug": gameslugkuld,
     "referrer": ""
       }
-      mennyitkuldott[jelenlegi] += 1
-      print("-> %s (%s) \n[%s] %s" % (fiokok[jelenlegi],mennyitkuldott[jelenlegi],mit,kerdes) + "\n")
       elkuld = request.post("https://ngl.link/api/submit", headers=fejresz, data=adat)
-      i = i + 1
+      eszkozid = eszkozidgeneralas()
+      if elkuld.status_code == 200:
+        print("-> %s (%s) \n[%s] %s" % (fiokok[jelenlegi],mennyitkuldott[jelenlegi],mit,kerdes) + "\n")
+        #print(elkuld)
+        mennyitkuldott[jelenlegi] += 1
+        i = i + 1
+      else:
+        print("[{}] Nem sikerült elküldeni. Várok 2 percet mielőtt újra megpróbálom\n".format(elkuld.status_code))
+        time.sleep(120)
 
     if (i == 10):
-      eszkozidgeneralas()
+      eszkozid = eszkozidgeneralas()
       jelenlegi += 1
       if jelenlegi == fiokokszama:
         jelenlegi = 0
       datum = datetime.now()
-      print("Next: -> " + fiokok[jelenlegi])
+      print("Következő: -> " + fiokok[jelenlegi])
       ido = datum.strftime("%H:%M:%S")
-      print("[{}] >> Intermission (2 mins)\n".format(ido))
+      print("[{}] >> Szünet (2 perc)\n".format(ido))
       time.sleep(120)
       i = 0
