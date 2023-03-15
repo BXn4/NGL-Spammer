@@ -80,7 +80,7 @@ try:
     rizzme = [sorok.strip() for sorok in olvas]
   with open("accounts.txt", "r") as olvas:
     fiokok = [sorok.strip() for sorok in olvas]
-  mennyitkuldott = [0 for _ in range(len(fiokok))]
+  mennyitkuldott = [1 for _ in range(len(fiokok))]
   fiokokszama = len(fiokok)
 
 except (FileNotFoundError):
