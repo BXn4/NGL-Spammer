@@ -1,7 +1,7 @@
 # ╔╗╔╔═╗╦    ╔═╗╔═╗╔═╗╔╦╗╔╦╗╔═╗╦═╗
 # ║║║║ ╦║    ╚═╗╠═╝╠═╣║║║║║║║╣ ╠╦╝
-# ╝╚╝╚═╝╩═╝  ╚═╝╩  ╩ ╩╩ ╩╩ ╩╚═╝╩╚═ v4.1
-# bug fixes
+# ╝╚╝╚═╝╩═╝  ╚═╝╩  ╩ ╩╩ ╩╩ ╩╚═╝╩╚═ v4.2
+# added log + message sent check
 
 # The program was made for automation.
 # This program violates NGL's terms of service, use it at your own risk!
@@ -47,6 +47,7 @@ gameslugkuld = ""
 kerdesarg = ""
 fiokarg = ""
 utolso = ""
+nemsikerult = 0
 request = requests.Session()
 
 def eszkozidgeneralas():
@@ -106,7 +107,6 @@ else:
     ismetles = -1
   else:
     ismetles = args.repeat
-
 
 if hossz > 0:
   fiokok = []
@@ -241,9 +241,8 @@ if hossz > 0:
       fejresz = {
         "Referer": url,
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        "user-agent":
-          "Mozilla/5.0 (X11; Linux x86_64; rv:108.0) Gecko/20100101 Firefox/108.0"
-      }
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64; rv:108.0) Gecko/20100101 Firefox/108.0"
+        }
 
       adat = {
         "username": fiok,
@@ -251,17 +250,31 @@ if hossz > 0:
         "deviceId": eszkozid,
         "gameSlug": gameslugkuld,
         "referrer": ""
-      }
+        }
+      
+      #print(eszkozid)
       elkuld = request.post("https://ngl.link/api/submit", headers=fejresz, data=adat)
       eszkozid = eszkozidgeneralas()
       if elkuld.status_code == 200:
+        nemsikerult = 0;
         print("-> %s (%s) \n[%s] %s" % (fiokok[jelenlegi],mennyitkuldott[jelenlegi],mit,kerdes) + "\n")
         #print(elkuld)
         mennyitkuldott[jelenlegi] += 1
         i = i + 1
       else:
-        print("[{}] Failed to send. I'll wait 2 minutes and try again later.\n".format(elkuld.status_code))
-        time.sleep(120)
+        nemsikerult = nemsikerult + 1
+        if nemsikerult < 4:
+          print("[{} ({}/3)] Failed! I'll try again after 20 seconds.\n".format(elkuld.status_code,nemsikerult))
+          time.sleep(20)
+        else:
+          datum = datetime.now()
+          datumido = datum.strftime("%Y-%m-%d")
+          ido = datum.strftime("%H:%M")
+          with open("logs/{}.txt".format(datumido), mode='a') as logfile:
+            logfile.write("{}\nAccount: {}\nError: {} https://www.abstractapi.com/http-status-codes/{}\nNGL: https://ngl.link/{}\n\n".format(ido,fiok,elkuld.status_code,elkuld.status_code,fiok))
+          print("[!!!] Failed! I continue with the next account.\nThe account is in the: logs/{}.txt file!\n".format(datumido))
+          nemsikerult = 0;
+          i = 10
 
     if (i == 10):
       eszkozid = eszkozidgeneralas()
@@ -383,13 +396,25 @@ else:
       elkuld = request.post("https://ngl.link/api/submit", headers=fejresz, data=adat)
       eszkozid = eszkozidgeneralas()
       if elkuld.status_code == 200:
+        nemsikerult = 0;
         print("-> %s (%s) \n[%s] %s" % (fiokok[jelenlegi],mennyitkuldott[jelenlegi],mit,kerdes) + "\n")
         #print(elkuld)
         mennyitkuldott[jelenlegi] += 1
         i = i + 1
       else:
-        print("[{}] Failed to send. I'll wait 2 minutes and try again later.\n".format(elkuld.status_code))
-        time.sleep(120)
+        nemsikerult = nemsikerult + 1
+        if nemsikerult < 4:
+          print("[{} ({}/3)] Failed! I'll try again after 20 seconds.\n".format(elkuld.status_code,nemsikerult))
+          time.sleep(20)
+        else:
+          datum = datetime.now()
+          datumido = datum.strftime("%Y-%m-%d")
+          ido = datum.strftime("%H:%M")
+          with open("logs/{}.txt".format(datumido), mode='a') as logfile:
+            logfile.write("{}\nAccount: {}\nError: {} https://www.abstractapi.com/http-status-codes/{}\nNGL: https://ngl.link/{}\n\n".format(ido,fiok,elkuld.status_code,elkuld.status_code,fiok))
+          print("[!!!] Failed! I continue with the next account.\nThe account is in the: logs/{}.txt file!\n".format(datumido))
+          nemsikerult = 0;
+          i = 10
 
     if (i == 10):
       eszkozid = eszkozidgeneralas()
