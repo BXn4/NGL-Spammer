@@ -22,7 +22,7 @@ Allows NGL  accounts to be spammed with pre-written questions. The APP can handl
 
 ## How To Use
 How to use: https://youtu.be/roLXTavyRkA<br>
-First you need the NGL account name. <br> You cant find the name after the "@" character. Or in the url field.
+First you need the NGL account name. <br> You can find the name after the "@" character. Or in the url field.
 If it differs, copy the name from the address bar of the browser, because the accounts can have the same name.
 <img src="https://user-images.githubusercontent.com/78733248/213011344-bfaf61fa-9e02-4fe8-a70c-eeb99e19f341.png">
 Once we have this, copy the name into the **accounts.txt**.
