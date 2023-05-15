@@ -1,11 +1,13 @@
 # ╔╗╔╔═╗╦    ╔═╗╔═╗╔═╗╔╦╗╔╦╗╔═╗╦═╗
 # ║║║║ ╦║    ╚═╗╠═╝╠═╣║║║║║║║╣ ╠╦╝
-# ╝╚╝╚═╝╩═╝  ╚═╝╩  ╩ ╩╩ ╩╩ ╩╚═╝╩╚═ v4.2
-# added log + message sent check
+# ╝╚╝╚═╝╩═╝  ╚═╝╩  ╩ ╩╩ ╩╩ ╩╚═╝╩╚═ v4.3
+# added account check
 
 # The program was made for automation.
 # This program violates NGL's terms of service, use it at your own risk!
-# Also, I don't support using it for harassment
+# Also, I don't support using it for harassment.
+
+# If you found a error, or you want a new feature please dm me on Telegram! t.me/bencewashere
 
 import time
 import requests
@@ -13,6 +15,9 @@ from random import *
 from datetime import datetime
 import uuid
 import argparse
+import hashlib
+import sys
+import os
 
 parser = argparse.ArgumentParser(prog = 'NGL-Spammer', description='Flooding NGL accounts with questions.')
 parser.add_argument("-a", "--account", help="Accounts separated with ','")
@@ -20,12 +25,13 @@ parser.add_argument("-q", "--question", help="Separate question(s) with ',' ('hi
 parser.add_argument("-r", "--repeat", help="Number of repetitions (0 = infinite)", type=int)
 args = parser.parse_args()
 
+global fiokokszama, jelenlegi, i, hossz, ismetles, kerdesekszama, holtartakerdesben, kerdesekpot, mennyitkuldott, kerdesek, fiokok, neverhave, haromwords, nevek, tbh, kissmarryblocklist, tizperde, rizzme, confessions, fiok, eszkozid, szavak, mit, gameslugkuld, kerdesarg, fiokarg, utolso, nemsikerult
 fiokokszama = 0
 jelenlegi = 0
 i = 0
+x = 0
 hossz = 0
 ismetles = 0
-x = 0
 kerdesekszama = 0
 holtartakerdesben = 0
 kerdesekpot = ""
@@ -39,6 +45,7 @@ tbh = []
 kissmarryblocklist = []
 tizperde = []
 rizzme = []
+confessions = []
 fiok = ""
 eszkozid = ""
 szavak = ""
@@ -50,6 +57,69 @@ utolso = ""
 nemsikerult = 0
 request = requests.Session()
 
+def clear():
+  if os.name == "nt":
+    os.system("cls")
+  else:
+    os.system("clear")
+
+def fiokokBeolvas():
+  global fiokok, mennyitkuldott, fiokokszama
+  with open("accounts.txt", "r") as olvas:
+    fiokok = [sorok.strip() for sorok in olvas]
+    mennyitkuldott = [1 for _ in range(len(fiokok))]
+    fiokokszama = len(fiokok)
+
+def ellenorzes():
+  global fiokokszama, fiokok
+  hibak = 0
+  hibas = []
+  for o in range(fiokokszama):
+    time.sleep(3)
+    valasz = requests.get("https://ngl.link/{}".format(fiokok[o]))
+    if valasz.status_code == 200:
+      print("[OK] -> {} ".format(fiokok[o]))
+    else:
+      hibak = hibak + 1
+      hibas.append(fiokok[o])
+      print("[!]  -> {} ".format(fiokok[o]))
+  clear()
+  fiokokStringx = ','.join(fiokok)
+  eredmenyx = hashlib.md5(fiokokStringx.encode())
+  with open("MD5.md5", mode='r+') as md5:
+    md5.seek(0)
+    md5.write(eredmenyx.hexdigest())
+  if hibak > 0:
+    print("There's {} accounts that does not exist.".format(hibak))
+    print("The accounts are:")
+    for g in range (len(hibas)):
+      print(hibas[g])
+    valasztas = ""
+    while valasztas not in ["Y", "N"]:
+        valasztas = input("The displayed accounts does not exist. Do you want to remove these? (Y/N): ")
+        valasztas = valasztas.upper()
+        if valasztas == "Y":
+          for g in range (len(hibas)):
+            fiokok.remove(hibas[g])
+            with open("accounts.txt", "w") as iras:
+              iras.write('\n'.join(fiokok))
+          print("Deleted!")
+          clear()
+          fiokokStringx = ','.join(fiokok)
+          eredmenyx = hashlib.md5(fiokokStringx.encode())
+          with open("MD5.md5", mode='r+') as md5:
+              md5.seek(0) 
+              md5.write(eredmenyx.hexdigest())
+        elif valasztas == "N":
+          print("Your answer is NO, and it is possible that the program returns with a 404 error.")
+          fiokokStringx = ','.join(fiokok)
+          eredmenyx = hashlib.md5(fiokokStringx.encode())
+          with open("MD5.md5", mode='r+') as md5:
+            md5.seek(0) 
+            md5.write(eredmenyx.hexdigest())
+          time.sleep(5)
+          clear()
+            
 def eszkozidgeneralas():
   eszkozid = uuid.uuid4().hex
   return "-".join([eszkozid[i:i+8] for i in range(0, 32, 8)])
@@ -62,7 +132,8 @@ def haromnevgeneralas():
 eszkozidgeneralas()
 eszkozid = eszkozidgeneralas()
 
-try:
+def kerdesekBeolvas():
+  global kerdesek, kerdesekpot, neverhave, haromwords, nevek, tbh, tizperde, rizzme, confessions
   with open("src/questions.txt", "r", encoding="UTF-8") as olvas:
     kerdesek = [sorok.strip() for sorok in olvas]
   with open("src/questions.txt", "r", encoding="UTF-8") as olvas:
@@ -79,27 +150,40 @@ try:
     tizperde = [sorok.strip() for sorok in olvas]
   with open("src/rizzme.txt", "r", encoding="UTF-8") as olvas:
     rizzme = [sorok.strip() for sorok in olvas]
-  with open("accounts.txt", "r") as olvas:
-    fiokok = [sorok.strip() for sorok in olvas]
-  mennyitkuldott = [1 for _ in range(len(fiokok))]
-  fiokokszama = len(fiokok)
-
-except (FileNotFoundError):
-  print("File not found!")
-
-datum = datetime.now()
-ido = datum.strftime("%H:%M:%S")
-print("NGL Spammer by: BXn4")
-print("\n[{}] >> Starting\n".format(ido))
-
+  with open("src/confessions.txt", "r", encoding="UTF-8") as olvas:
+    confessions = [sorok.strip() for sorok in olvas]
+    
+def ellenorzesMD():
+  global fiokok
+  fiokokString = ','.join(fiokok)
+  eredmeny = hashlib.md5(fiokokString.encode())
+  if eredmeny.hexdigest() == "346c0131861b4b0811559318a7954187":
+    print("The accounts.txt file only contains the example accounts. Please enter the accounts!")
+    input("Press enter to exit...")
+    sys.exit()
+  else:
+    with open("MD5.md5", mode='r+') as md5:
+      adat = md5.read()
+      if adat != eredmeny.hexdigest():
+        if adat!= "0":
+          print("Checking the accounts.")
+          print("If the accounts.txt file has not been changed, this step will be skipped.")
+          print("If you want to ensure that the step is always skipped, you can modify the MD5.md5 file to contain the value 0. This will effectively bypass the step regardless if the accounts.txt file has changed.")
+          ellenorzes()
+          
 if args.account is None:
   hossz = 0
+  fiokokBeolvas()
+  ellenorzesMD()
+  kerdesekBeolvas()
 else:
   hossz = 1
+  fiokokBeolvas()
   fiokarg = args.account
   kerdesarg = args.question
   if args.question is None:
     kerdesarg = " "
+    kerdesekBeolvas()
   ismetles = args.repeat
   if ismetles is None:
     ismetles = -1
@@ -108,6 +192,10 @@ else:
   else:
     ismetles = args.repeat
 
+datum = datetime.now()
+ido = datum.strftime("%H:%M:%S")
+print("NGL Spammer by: BXn4")
+print("\n[{}] >> Starting\n".format(ido))
 if hossz > 0:
   fiokok = []
   kerdesek = []
@@ -118,6 +206,8 @@ if hossz > 0:
   kerdesek.extend(kerdesek_split)
   fiokokszama = len(fiokok)
   kerdesekszama = len(kerdesek)
+  mennyitkuldott = [1 for _ in range(len(fiokok))]
+  fiokokszama = len(fiokok)
   while x != ismetles:
     if i < 10:
       time.sleep(1)
@@ -130,6 +220,15 @@ if hossz > 0:
           gameslugkuld = "rizzme"
           if kerdesarg == " ":
             kerdes = (choice(rizzme))
+          else:
+            kerdes = kerdesek[holtartakerdesben]
+        if "confessions" in fiok:
+          fiok_split = fiok.split("/")[0]
+          fiok = fiok_split
+          mit = "Confessions"
+          gameslugkuld = "confessions"
+          if kerdesarg == " ":
+            kerdes = (choice(confessions))
           else:
             kerdes = kerdesek[holtartakerdesben]
         if "neverhave" in fiok:
@@ -153,6 +252,18 @@ if hossz > 0:
             szavak += (choice(nevek))
             crush = szavak.replace('\n', '')
             kerdes = crush
+            szavak = ""
+          else:
+            kerdes = kerdesek[holtartakerdesben]
+        if "wfriendship" in fiok:
+          fiok_split = fiok.split("/")[0]
+          fiok = fiok_split
+          mit = "Friendship"
+          gameslugkuld = "wfriendship"
+          if kerdesarg == " ":
+            szavak += (choice(nevek))
+            friendship = szavak.replace('\n', '')
+            kerdes = friendship
             szavak = ""
           else:
             kerdes = kerdesek[holtartakerdesben]
@@ -252,13 +363,11 @@ if hossz > 0:
         "referrer": ""
         }
       
-      #print(eszkozid)
       elkuld = request.post("https://ngl.link/api/submit", headers=fejresz, data=adat)
       eszkozid = eszkozidgeneralas()
       if elkuld.status_code == 200:
         nemsikerult = 0;
         print("-> %s (%s) \n[%s] %s" % (fiokok[jelenlegi],mennyitkuldott[jelenlegi],mit,kerdes) + "\n")
-        #print(elkuld)
         mennyitkuldott[jelenlegi] += 1
         i = i + 1
       else:
@@ -307,6 +416,14 @@ else:
           rizzmeKuld = szavak.replace('\n', '')
           kerdes = rizzmeKuld
           szavak = ""
+        if "confessions" in fiok:
+          fiok = fiok.split("/")[0]
+          mit = "Confessions"
+          gameslugkuld = "confessions"
+          szavak += (choice(confessions))
+          confessionsKuld = szavak.replace('\n', '')
+          kerdes = confessionsKuld
+          szavak = ""
         if "neverhave" in fiok:
           fiok = fiok.split("/")[0]
           mit = "Neverhave"
@@ -322,6 +439,14 @@ else:
           szavak += (choice(nevek))
           crush = szavak.replace('\n', '')
           kerdes = crush
+          szavak = ""
+        if "wfriendship" in fiok:
+          fiok = fiok.split("/")[0]
+          mit = "Friendship"
+          gameslugkuld = "wfriendship"
+          szavak += (choice(nevek))
+          friendship = szavak.replace('\n', '')
+          kerdes = friendship
           szavak = ""
         if "shipme" in fiok:
           fiok = fiok.split("/")[0]
@@ -398,7 +523,6 @@ else:
       if elkuld.status_code == 200:
         nemsikerult = 0;
         print("-> %s (%s) \n[%s] %s" % (fiokok[jelenlegi],mennyitkuldott[jelenlegi],mit,kerdes) + "\n")
-        #print(elkuld)
         mennyitkuldott[jelenlegi] += 1
         i = i + 1
       else:
