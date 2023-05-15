@@ -25,11 +25,13 @@ How to use: https://youtu.be/roLXTavyRkA<br>
 First you need the NGL account name. <br> You can find the name after the "@" character. Or in the url field.
 If it differs, copy the name from the address bar of the browser, because the accounts can have the same name.
 <img src="https://user-images.githubusercontent.com/78733248/213011344-bfaf61fa-9e02-4fe8-a70c-eeb99e19f341.png">
-Once we have this, copy the name into the **accounts.txt**.
+Then copy the name into the **accounts.txt**.
 There is no limit to how many names you can enter!
 Then you can start the program.
+<br>
+**If you want to ensure that the account checking step is always skipped**, you can modify the **MD5.md5** file to contain the value **0**. This will effectively bypass the step regardless if the accounts.txt file has changed.
 ## Startup parameters
-You can start it with parameters.
+You can start it with parameters, if you want. You need to enter the accounts.
 [-a ACCOUNT] [-q QUESTION] [-r REPEAT]
 ```bash
 # Query parameters
@@ -45,7 +47,16 @@ $ python NGL-Spammer -h
 ## Download
 First of all you need [Git](https://git-scm.com), or you can download it from  [Releases](https://github.com/bxn4/ngl-spammer_en/releases) the latest release.
 To run it download, and install [Python](https://www.python.org/), if it is not installed  it will won't work.
+<br>
+Download Python:
+For [Windows](https://www.python.org/downloads)
+```bash
+# Ubuntu / Debian
+$ sudo apt install python
 
+# Fedora
+$ sudo dnf install python
+```
 ```bash
 # Download with git
 $ git clone https://github.com/bxn4/ngl-spammer_en
