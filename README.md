@@ -4,7 +4,7 @@
   <br>
   NGL Spammer
 </h1>
-<p align="center"><a href="https://github.com/BXn4/NGL-Spammer_en">EN</a> - <a href="https://github.com/BXn4/NGL-Spammer">HU</a></p>
+<p align="center"><a href="https://github.com/BXn4/NGL-Spammer">EN</a> - <a href="https://github.com/BXn4/NGL-Spammer/blob/main/README_HU.md">HU</a></p>
 <h4 align="center">Flooding NGL accounts with questions</h4>
 <p align="center">
 <p align="center">
@@ -114,4 +114,4 @@ used drugs
 ```
 ## Support me!
 
-<a href="https://www.buymeacoffee.com/bence912" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee">
+<a href="https://www.buymeacoffee.com/bxn4" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee">
