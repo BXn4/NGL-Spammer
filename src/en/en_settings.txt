@@ -1,0 +1,24 @@
+select_lang=Please select a language
+enter_lang_option=Enter your option:
+invalid=Invalid!
+skip_account_check=Do you want to skip account checking?
+y=y
+n=n
+setup_done=Setup done!
+description=Flooding NGL accounts with questions.
+accounts=Accounts separated with ','
+question=Separate question(s) with ',' ('hi','what are you doing?')
+repeat=Number of repeat cycles (0 = infinite)
+invalid_accounts1=There's {} accounts that does not exist.
+invalid_accounts2=The accounts are:
+accounts_does_not_exist=The displayed accounts does not exist. Do you want to remove these? ({}/{}):
+invalid_accounts3=Your answer is NO, and it is possible that the program returns with a 404 error.
+example_accounts=The accounts.txt file only contains the example accounts. Please enter the accounts!
+press_enter=Press enter to exit...
+checking=Checking the accounts.
+if_not_changed=If the accounts.txt file has not been changed, this step will be skipped.
+never_have=I've never
+try_again=[{} ({}/3)] Failed! I'll try again after 20 seconds.
+failed_to_send=[!!!] Failed! I continue with the next account.\nThe account is in the: logs/{}.txt file!
+intermission=Intermission (2 mins)
+repeats=Number of repeats

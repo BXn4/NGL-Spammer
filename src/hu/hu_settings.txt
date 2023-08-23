@@ -1,0 +1,24 @@
+select_lang=Kérlek válassz nyelvet:
+enter_lang_option=Opció:
+invalid=Helytelen!
+skip_account_check=Szeretnéd kihagyni a fiók ellenőrzését?
+y=i
+n=n
+setup_done=Kész!
+description=NGL fiókok elárasztása kérdésekkel.
+accounts=A fiók(ok) megadása ,-vel elválasztva
+question=A kérdés(ek) megadása ,-vel elválasztva: ('szia','mit csinálsz?')
+repeat=Az ismétlések száma (0 = végtelen)
+invalid_accounts1=Összesen {} fiókot találtam, ami nem létezik.
+invalid_accounts2=A fiókok a következőek:
+accounts_does_not_exist=A megjelenített fiókok nem léteznek. Szeretnéd, hogy eltávolításra kerüljenek? (I/N):
+invalid_accounts3=Mivel NEM a válaszod, ezért elképzelhető, hogy a program 404-es hibával tér vissza.
+example_accounts=A fiokok.txt fájl tartalma a példa fiókok. Kérlek írd bele a kívánt fiókokat!
+press_enter=Nyomj egy entert a kilépéshez..."
+checking=Ellenőrzöm, hogy az általad megadott fiókok léteznek-e.
+if_not_changed=Ez egy egyszeri alkalom. Ha a fiokok.txt tartalma nem változik, akkor ez a lépés kihagyásra kerül.
+never_have=Én még sohasem
+try_again=[{} ({}/3)] Sikertelen! Megpróbálom 20 másodperc múlva.
+failed_to_send=[!!!] Sikertelen! Folytatom a Következő fiókkal.\nA fiók megtalálható a: logs/{}.txt fájlban!
+intermission=Intermission (2 mins)
+repeats=Ismétlések száma
